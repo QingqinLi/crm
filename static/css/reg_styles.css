@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    color: #6a6f8c;
+    background: #d4d4d4;
+    font: 600 16px/18px 'Open Sans', sans-serif
+}
+
+*, :after, :before {
+    box-sizing: border-box
+}
+
+.clearfix:after, .clearfix:before {
+    content: '';
+    display: table
+}
+
+.clearfix:after {
+    clear: both;
+    display: block
+}
+
+a {
+    color: inherit;
+    text-decoration: none
+}
+
+input, button {
+    outline: 0;
+    border: 0
+}
+
+.login-wrap {
+    width: 100%;
+    margin: auto;
+    max-width: 525px;
+    min-height: 670px;
+    position: relative;
+    background: url(../imgs/reg_bg.jpg) no-repeat center;
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .30), 0 17px 50px 0 rgba(0, 0, 0, .1)
+}
+
+.login-html {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    padding: 90px 70px 50px;
+    background: rgba(40, 57, 101, .80)
+}
+
+.tab {
+    font-size: 30px;
+    margin-right: 15px;
+    padding-bottom: 5px;
+    margin: 0 15px 10px 0;
+    display: inline-block;
+    color: white;
+
+}
+
+.login-form {
+    min-height: 345px;
+    position: relative;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+
+}
+
+.login-form .group {
+    margin-bottom: 15px
+}
+
+.login-form .group .label, .login-form .group .input, .login-form .group .button {
+    width: 100%;
+    color: #fff;
+    display: block
+}
+
+.login-form .group .input, .login-form .group .button, .s1{
+    border: 1px;
+    padding: 15px 20px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, .1)
+}
+
+.login-form .group .label {
+    color: #aaa;
+    font-size: 12px
+}
+
+.login-form .group .button {
+    background: #1161ee
+}
+.s1 {
+    height: 45px;
+    width: 100%;
+    background: rgb(232, 240, 254);
+    border-radius: 40px;
+}
+
+.hr {
+    height: 2px;
+    background: rgba(255, 255, 255, .2)
+}

@@ -1,0 +1,82 @@
+{% load static %}
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>crm管理系统</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reg_styles.css' %}">
+    <!--[if IE]>
+		<script src="http://libs.baidu.com/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+<div class="jq22-container" style="padding-top:100px">
+    <div class="login-wrap">
+        <div class="login-html">
+            <label for="tab-2" class="tab">注册</label>
+            <hr class="hr">
+            <div class="login-form">
+                <form action="" method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="sign-up-htm" id="tab-2">
+                        <div class="group has-error username">
+                            <label class="label">{{ reg_form.username.label }}</label>
+                            {{ reg_form.username }}
+                            <span style="color: red" id="user-error">{{ reg_form.username.errors.0 }}</span>
+                        </div>
+                        <div class="group">
+                            <label class="label">{{ reg_form.name.label }}</label>
+                            {{ reg_form.name }}
+                            <span style="color: red">{{ reg_form.name.errors.0 }}</span>
+                        </div>
+                        <div class="group">
+                            <label class="label">{{ reg_form.password.label }}</label>
+                            {{ reg_form.password }}
+                            <span style="color: red">{{ reg_form.password.errors.0 }}</span>
+                        </div>
+                        <div class="group">
+                            <label class="label">{{ reg_form.re_password.label }}</label>
+                            {{ reg_form.re_password }}
+                            <span style="color: red">{{ reg_form.re_password.errors.0 }}</span>
+                        </div>
+                        <div class="group">
+                            <label class="label">{{ reg_form.department.label }}</label>
+                            {{ reg_form.department }}
+                            <span style="color: red">{{ reg_form.department.errors.0 }}</span>
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button" value="登录" id="bt">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script>
+{#可以使用ajax校验用户是否已经存在，也可以在form中验证，简单#}
+    {#$("#user").blur(function () {#}
+    {#    $.ajax({#}
+    {#        url:"{% url "crm:check_name" %}",#}
+    {#        type: "post",#}
+    {##}
+    {#        data : {#}
+    {#            csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val(),#}
+    {#            username: $("#user").val()#}
+    {#        },#}
+    {#        success:function (res) {#}
+    {#            $("#user-error").text(res);#}
+    {#            console.log(res)#}
+    {#        }#}
+    {#    })#}
+    {#{);#}
+    $(".input").click(function () {
+        $(this).next().text("")
+    }
+    )
+
+</script>
+</body>
+</html>
