@@ -53,3 +53,7 @@ def check_name(request):
             return HttpResponse("用户已存在")
     else:
         return HttpResponse("")
+
+
+def customer_list(request):
+    return render(request, 'layout.html')
