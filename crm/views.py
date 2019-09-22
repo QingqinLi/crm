@@ -79,19 +79,42 @@ def user_list(request):
         current_page = int(request.GET.get('page'))
     except TypeError:
         current_page = 1
-    item = 20
+    item = 10
     user_list = [{"id": i, "name": "alex%s" % i, "sex": "男"} for i in range(1, 203)]
-    range_start = 1
+    max_page = 5
     if divmod(len(user_list), item)[1] == 0:
-        range_end = len(user_list) // item + 1
+        end = len(user_list) // item
     else:
-        range_end = len(user_list) // item + 2
-    page = range(range_start, range_end)
-    print(page)
-    data = user_list[(current_page - 1) * item:current_page * 20]
-    print(data)
+        end = len(user_list) // item + 1
+    range_start = current_page - max_page//2
+    range_end = current_page + max_page // 2
+    if range_start < 1:
+        range_start = 1
+        range_end = max_page
+    if range_end > end:
+        range_end = end
+        range_start = range_end - max_page + 1
+
+    # range_start = 10
+    page = range(range_start, range_end + 1)
+    # print(page)
+    data = user_list[(current_page - 1) * item:current_page * item]
+    print("end", end)
+    if current_page == 1:
+        previous = 1
+        next = current_page + 1
+    elif current_page == end:
+        previous = current_page - 1
+        next = current_page
+    else:
+        previous = current_page - 1
+        next = current_page + 1
+    print(previous, next)
+
     return render(request, 'crm/user_list.html',
                   {
                       "user": data,
                       "page": page,
+                      "previous": previous,
+                      "next": next,
                   })
