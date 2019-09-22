@@ -69,3 +69,20 @@ class RegForm(forms.ModelForm):
             return self.cleaned_data
         self.add_error('re_password', '两次密码不一致')
         raise ValidationError("两次密码不一致")
+
+
+class CustomerForm(forms.ModelForm):
+    class Meta:
+        model = models.Customer
+        fields = '__all__'
+        widgets = {
+            'course': forms.widgets.SelectMultiple,
+            'birthday': forms.widgets.DateInput,
+            'next_date': forms.widgets.DateTimeBaseInput,
+            'last_consult_date': forms.widgets.DateTimeInput,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for i in self.fields.values():
+            i.widget.attrs.update({"class": "form-control"})

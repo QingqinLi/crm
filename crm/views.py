@@ -55,5 +55,43 @@ def check_name(request):
         return HttpResponse("")
 
 
-def customer_list(request):
-    return render(request, 'layout.html')
+@login_required()
+def customer_list(request, page=None):
+    customer = models.Customer.objects.all()
+    print(customer)
+    return render(request, 'crm/customer_list.html', {'customer': customer})
+
+
+@login_required()
+def add_customer(request):
+    form_obj = form.CustomerForm()
+    if request.method == 'POST':
+        form_obj = form.CustomerForm(request.POST)
+        if form_obj:
+            # modelsForm的创建用户的方式
+            form_obj.save()
+            return redirect(reverse("crm:customer"))
+    return render(request, 'crm/customer_add.html', {'form_obj': form_obj})
+
+
+def user_list(request):
+    try:
+        current_page = int(request.GET.get('page'))
+    except TypeError:
+        current_page = 1
+    item = 20
+    user_list = [{"id": i, "name": "alex%s" % i, "sex": "男"} for i in range(1, 203)]
+    range_start = 1
+    if divmod(len(user_list), item)[1] == 0:
+        range_end = len(user_list) // item + 1
+    else:
+        range_end = len(user_list) // item + 2
+    page = range(range_start, range_end)
+    print(page)
+    data = user_list[(current_page - 1) * item:current_page * 20]
+    print(data)
+    return render(request, 'crm/user_list.html',
+                  {
+                      "user": data,
+                      "page": page,
+                  })

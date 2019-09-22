@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html'%}
 {% block content %}
     <div class="panel panel-default">
         <!-- Default panel contents -->
@@ -14,30 +14,15 @@
                     <th>编号</th>
                     <th>昵称</th>
                     <th>性别</th>
-                    <th>电话</th>
-                    <th>来源</th>
-                    <th>课程</th>
-                    <th>备注</th>
-                    <th>状态</th>
-                    <th>下次跟进日期</th>
-                    <th>销售</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for i in customer %}
+                {% for i in user %}
                     <tr>
                         <td>{{ i.id }}</td>
                         <td>{{ i.name }}</td>
-                        <td>{{ i.get_sex_display }}</td>
-                        <td>{{ i.phone }}</td>
-                        <td>{{ i.source }}</td>
-                        <td>{{ i.show_class|default:'--' }}</td>
-                        <td>{{ i.customer.note|default:'--' }}</td>
-                        <td>
-                            {{ i.show_status }}
-                        </td>
-                        <td>{{ i.last_consult_data|default:'--' }}</td>
-                        <td>{{ i.consult|default:'--' }}</td>
+                        <td>{{ i.sex }}</td>
+
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -50,11 +35,10 @@
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li><a href="{% url "crm:customer" %}?page=1">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
+                    {% for i in page %}
+                        <li><a href="{% url "crm:customer" %}?page={{ i }}">{{ i }}</a></li>
+                    {% endfor %}
+
                     <li>
                         <a href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
