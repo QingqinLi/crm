@@ -24,20 +24,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for i in customer %}
+                {% for i in data %}
                     <tr>
                         <td>{{ i.id }}</td>
                         <td>{{ i.name }}</td>
                         <td>{{ i.get_sex_display }}</td>
                         <td>{{ i.phone }}</td>
-                        <td>{{ i.source }}</td>
-                        <td>{{ i.show_class|default:'--' }}</td>
-                        <td>{{ i.customer.note|default:'--' }}</td>
+                        <td>{{ i.get_source_display }}</td>
+                        <td>{{ i.show_classes }}</td>
+                        <td>{{ i.customer_note}}</td>
                         <td>
                             {{ i.show_status }}
                         </td>
-                        <td>{{ i.last_consult_data|default:'--' }}</td>
-                        <td>{{ i.consult|default:'--' }}</td>
+                        <td>{{ i.next_date }}</td>
+                        <td>{{ i.consultant }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -50,11 +50,10 @@
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li><a href="{% url "crm:customer" %}?page=1">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
+                    {% for i in page %}
+                        <li><a href="{% url "crm:customer" %}?page={{ i }}">{{ i }}</a></li>
+                    {% endfor %}
+
                     <li>
                         <a href="{% url "crm:customer" %}?page={{ next }}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>

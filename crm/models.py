@@ -88,7 +88,7 @@ class Customer(models.Model):
     consultant = models.ForeignKey('UserProfile', verbose_name="销售", related_name='customers', blank=True, null=True, )
     class_list = models.ManyToManyField('ClassList', verbose_name="已报班级", blank=True, null=True)
 
-    def show_class(self):
+    def show_classes(self):
         return ','.join([str(i) for i in self.class_list.all()])
 
     def show_status(self):
@@ -110,6 +110,9 @@ class Campuses(models.Model):
     """
     name = models.CharField(verbose_name='校区', max_length=64)
     address = models.CharField(verbose_name='详细地址', max_length=512, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class ContractTemplate(models.Model):
@@ -142,7 +145,7 @@ class ClassList(models.Model):
         unique_together = ("course", "semester", 'campuses')
 
     def __str__(self):
-        return "{}-{}-{}".format(self.course, self.semester, self.campuses)
+        return "{}-{}-{}".format(self.get_course_display(), self.semester, self.campuses)
 
 
 class ConsultRecord(models.Model):

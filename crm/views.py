@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from crm import form
 from crm import models
+from utils.pagination import Pagination
 
 
 # Create your views here.
@@ -56,10 +57,13 @@ def check_name(request):
 
 
 @login_required()
-def customer_list(request, page=None):
+def customer_list(request):
     customer = models.Customer.objects.all()
     print(customer)
-    return render(request, 'crm/customer_list.html', {'customer': customer})
+    c = Pagination(request, 10, 10, customer)
+    customer_data = c.show_list()
+    print(customer_data)
+    return render(request, 'crm/customer_list.html', customer_data)
 
 
 @login_required()
