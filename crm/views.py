@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 from crm import form
 from crm import models
 from utils.pagination import Pagination
+from django.views import View
+from django.db.models import Q
+from django.http import QueryDict
 
 
 # Create your views here.
@@ -56,26 +59,124 @@ def check_name(request):
         return HttpResponse("")
 
 
+class Customer(View):
+
+    def get(self, request):
+        query_list = ['id', 'name', 'qq_name']
+        q = self.get_search_condition(query_list)
+        if request.path_info == reverse('crm:customer'):
+            customer = models.Customer.objects.filter(q, consultant__isnull=True)
+        else:
+            customer = models.Customer.objects.filter(q, consultant=request.user)
+
+        query_params = request.GET.copy()
+
+        c = Pagination(request, 10, 10, customer, query_params)
+        customer_data = c.show_li
+        # print("urlencode()", customer_data)
+
+        next_url = self.get_add_btn()
+        print("next_url", next_url)
+        return render(request, 'crm/customer_list.html', {'page': customer_data, "data": c.show_list,
+                                                          'next_url': next_url})
+
+    def post(self, request):
+        operate = request.POST.get('operate')
+        # ids = request.POST.getlist("id")
+        if not hasattr(self, operate):
+            return HttpResponse("illegal operation")
+        else:
+            getattr(self, operate)()
+        return self.get(request)
+
+    def multi_delete(self):
+        ids = self.request.POST.getlist("id")
+        models.Customer.objects.filter(id__in=ids).delete()
+
+    # 放入私户
+    def multi_apply(self):
+        ids = self.request.POST.getlist("id")
+        ids_objs = models.Customer.objects.filter(id__in=ids)
+        if ids:
+            for id in ids_objs:
+                id.consultant = self.request.user
+                # 需要save
+                id.save()
+                print(id.consultant)
+
+        print(ids)
+        # models.Customer.objects.filter(id__in=ids).update(consultant=self.request.user) 不需要save
+        # self.request.user.customers.add(*models.Customer.objects.filter(id__in=ids))
+
+    # 放入公户
+    def multi_pub(self):
+        ids = self.request.POST.getlist("id")
+        models.Customer.objects.filter(id__in=ids).update(consultant=None)
+
+    def get_search_condition(self, query_list):
+        query = self.request.GET.get('query', '')
+        q = Q()
+        q.connector = 'OR'
+        for i in query_list:
+            q.children.append(Q(('{}__contains'.format(i), query)))
+
+        return q
+
+    def get_add_btn(self):
+        url = self.request.get_full_path()
+        qd = QueryDict()
+        qd._mutable = True
+        qd['next_page'] = url
+        print("qd", qd)
+        query_params = qd.urlencode()
+
+        return query_params
+
+
 @login_required()
 def customer_list(request):
-    customer = models.Customer.objects.all()
-    print(customer)
+    # 判断用户请求的是公户还是私户
+    if request.path_info == reverse('crm:customer'):
+        customer = models.Customer.objects.filter(consultant__isnull=True)
+    else:
+        customer = models.Customer.objects.filter(consultant=request.user)
     c = Pagination(request, 10, 10, customer)
     customer_data = c.show_list()
-    print(customer_data)
+
     return render(request, 'crm/customer_list.html', customer_data)
 
 
+# 添加和编辑可以使用一个view函数
 @login_required()
 def add_customer(request):
     form_obj = form.CustomerForm()
+    next = request.GET.get("next_page")
+    print("next", next)
     if request.method == 'POST':
         form_obj = form.CustomerForm(request.POST)
-        if form_obj:
+        if form_obj.is_valid():
             # modelsForm的创建用户的方式
             form_obj.save()
+            if next:
+                return redirect(next)
             return redirect(reverse("crm:customer"))
     return render(request, 'crm/customer_add.html', {'form_obj': form_obj})
+
+
+@login_required()
+def edit_customer(request, edit_id):
+    obj = models.Customer.objects.filter(id=edit_id).first()
+    form_obj = form.CustomerForm(instance=obj)
+    next = request.GET.get("next_page")
+
+    if request.method == 'POST':
+        form_obj = form.CustomerForm(request.POST, instance=obj)
+        if form_obj.is_valid():
+            form_obj.save()
+            if next:
+                return redirect(next)
+            return redirect(reverse('crm:customer'))
+    return render(request, 'crm/customer_edit.html', {'form_obj': form_obj})
 
 
 def user_list(request):

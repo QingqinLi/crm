@@ -49,8 +49,8 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="{% url 'crm:customer' %}">客户列表</a></li>
-                <li><a href="#">Reports</a></li>
+                <li><a href="{% url 'crm:customer' %}">客户列表</a></li>
+                <li><a href="{% url 'crm:my_customer' %}">我的客户</a></li>
                 <li><a href="#">Analytics</a></li>
                 <li><a href="#">Export</a></li>
             </ul>
@@ -65,6 +65,13 @@
 
 <script src="{% static 'js/jQuery.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-3.3.7-dist/js/bootstrap.js' %}"></script>
+<script>
+    $("li").click(function(){
+        $(this).parent().children("li").removeClass("active");
+        console.log($("this"));
+        $(this).addClass("active");
+    })
+</script>
 
 {% block js %}
 

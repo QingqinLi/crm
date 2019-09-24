@@ -2,16 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23d5e43c-e930-47b3-be76-14e79d923930" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/nb_crm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/nb_crm.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crm/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/crm/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/crm/form.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/crm/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/crm/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/crm/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/crm/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/crm/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/crm/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crm/customer_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer_add.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/crm/customer_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/pagination.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/pagination.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,15 +57,27 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/crm/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="68" column="17" lean-forward="true" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
+            <state relative-caret-position="527">
+              <caret line="61" selection-start-line="61" selection-end-line="61" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
-                <element signature="e#255#817#0" />
-                <element signature="e#928#1521#0" />
-                <element signature="e#1553#1797#0" />
-                <element signature="e#2050#2375#0" />
+                <element signature="e#968#1561#0" />
+                <element signature="e#1593#1837#0" />
+                <element signature="e#1962#4242#0" />
+                <element signature="e#1895#2109#0" />
+                <element signature="e#4853#5306#0" />
+                <element signature="e#2561#2692#0" />
+                <element signature="e#2531#3842#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="layout.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/layout.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-21">
+              <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -74,26 +85,22 @@
       <file leaf-file-name="customer_list.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/crm/customer_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="515">
-              <caret line="45" column="46" lean-forward="true" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
+            <state relative-caret-position="253">
+              <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+              <folding>
+                <element signature="e#405#431#0#HTML" expanded="true" />
+                <element signature="e#681#707#0#HTML" expanded="true" />
+                <element signature="e#1054#1094#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="crm_customer" pinned="false" current-in-tab="false">
-        <entry file="das://681a8315-15a9-468e-ace1-8895d5ffc5bf/schema/nb_crm/table/crm_customer">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pagination.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/pagination.py">
+      <file leaf-file-name="customer_edit.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/crm/customer_edit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="408">
+              <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -101,65 +108,35 @@
       <file leaf-file-name="customer_add.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/crm/customer_add.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user_list.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/crm/user_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
-              <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="47" selection-end-column="18" />
+            <state relative-caret-position="48">
+              <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
               <folding>
-                <element signature="e#918#1692#0#HTML" />
+                <element signature="e#689#727#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/crm/models.py">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/crm/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="93" column="26" lean-forward="true" selection-start-line="93" selection-start-column="26" selection-end-line="93" selection-end-column="26" />
+            <state relative-caret-position="456">
+              <caret line="19" column="10" lean-forward="true" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
               <folding>
-                <element signature="e#0#28#0" expanded="true" />
-                <element signature="e#4668#4840#0" />
-                <element signature="e#4885#5053#0" />
-                <element signature="e#6090#6563#0" />
-                <element signature="e#6602#7465#0" />
-                <element signature="e#7507#8777#0" />
-                <element signature="e#10470#11745#0" />
+                <element signature="e#74#106#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="crm_customer_class_list" pinned="false" current-in-tab="false">
-        <entry file="das://681a8315-15a9-468e-ace1-8895d5ffc5bf/schema/nb_crm/table/crm_customer_class_list">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="crm_classlist" pinned="false" current-in-tab="false">
-        <entry file="das://681a8315-15a9-468e-ace1-8895d5ffc5bf/schema/nb_crm/table/crm_classlist">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/crm/admin.py">
+      <file leaf-file-name="pagination.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/pagination.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+            <state relative-caret-position="230">
+              <caret line="65" column="17" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="17" />
+              <folding>
+                <element signature="e#74#107#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -170,8 +147,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -211,16 +188,18 @@
         <option value="$PROJECT_DIR$/static/css/dashboard.css" />
         <option value="$PROJECT_DIR$/nb_crm/settings.py" />
         <option value="$PROJECT_DIR$/nb_crm/__init__.py" />
-        <option value="$PROJECT_DIR$/templates/layout.html" />
-        <option value="$PROJECT_DIR$/crm/form.py" />
-        <option value="$PROJECT_DIR$/templates/crm/customer_add.html" />
         <option value="$PROJECT_DIR$/templates/crm/user_list.html" />
-        <option value="$PROJECT_DIR$/crm/urls.py" />
-        <option value="$PROJECT_DIR$/crm/views.py" />
-        <option value="$PROJECT_DIR$/utils/pagination.py" />
-        <option value="$PROJECT_DIR$/crm/models.py" />
-        <option value="$PROJECT_DIR$/templates/crm/customer_list.html" />
         <option value="$PROJECT_DIR$/crm/admin.py" />
+        <option value="$PROJECT_DIR$/crm/models.py" />
+        <option value="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/forms/models.py" />
+        <option value="$PROJECT_DIR$/crm/form.py" />
+        <option value="$PROJECT_DIR$/templates/layout.html" />
+        <option value="$PROJECT_DIR$/templates/crm/customer_edit.html" />
+        <option value="$PROJECT_DIR$/templates/crm/customer_add.html" />
+        <option value="$PROJECT_DIR$/utils/pagination.py" />
+        <option value="$PROJECT_DIR$/templates/crm/customer_list.html" />
+        <option value="$PROJECT_DIR$/crm/views.py" />
+        <option value="$PROJECT_DIR$/crm/urls.py" />
       </list>
     </option>
   </component>
@@ -246,6 +225,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -285,11 +265,14 @@
               <item name="crm" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="nb_crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -370,6 +353,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5026624" side_tool="true" weight="0.5386965" />
@@ -377,13 +361,12 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.2437186" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49733758" weight="0.21690428" />
-      <window_info active="true" anchor="bottom" id="Database Console" order="8" visible="true" weight="0.709776" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12832801" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49733758" visible="true" weight="0.30448064" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12939297" />
       <window_info anchor="right" id="R Packages" order="3" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="R Graphics" order="3" weight="0.32960597" />
-      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.16666667" />
+      <window_info anchor="right" id="Database" order="3" weight="0.16666667" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
@@ -394,33 +377,34 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Database Console" order="8" weight="0.4551935" />
       <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.3299389" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2437186" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1260745" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="R Graphics" order="4" weight="0.32960597" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2437186" />
       <window_info anchor="right" id="R Packages" order="5" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49781182" weight="0.13149078" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5021882" side_tool="true" weight="0.6691569" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.010887772" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Database" order="6" weight="0.17144221" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,50 +419,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://a98039f1-6d55-4adb-929f-880e8aa936a8/schema/nb_crm/table/crm_customer">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crm/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4559">
-          <caret line="103" column="24" selection-start-line="103" selection-start-column="24" selection-end-line="103" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#4668#4840#0" />
-            <element signature="e#4885#5053#0" />
-            <element signature="e#6090#6563#0" />
-            <element signature="e#6602#7465#0" />
-            <element signature="e#7507#8777#0" />
-            <element signature="e#10470#11745#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crm/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2115">
-          <caret line="80" column="24" lean-forward="true" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-            <element signature="e#255#817#0" />
-            <element signature="e#928#1521#0" />
-            <element signature="e#1553#1797#0" />
-            <element signature="e#2050#2375#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3243">
-          <caret line="69" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/crm/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="564">
@@ -546,10 +486,13 @@
           <caret line="29" selection-start-line="29" selection-end-line="29" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
-            <element signature="e#255#817#0" />
-            <element signature="e#928#1521#0" />
-            <element signature="e#1553#1797#0" />
-            <element signature="e#2050#2375#0" />
+            <element signature="e#968#1561#0" />
+            <element signature="e#1593#1837#0" />
+            <element signature="e#1962#4242#0" />
+            <element signature="e#1895#2109#0" />
+            <element signature="e#4853#5306#0" />
+            <element signature="e#2561#2692#0" />
+            <element signature="e#2531#3842#0" />
           </folding>
         </state>
       </provider>
@@ -584,10 +527,13 @@
           <caret line="54" column="1" selection-start-line="54" selection-start-column="1" selection-end-line="54" selection-end-column="1" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
-            <element signature="e#255#817#0" />
-            <element signature="e#928#1521#0" />
-            <element signature="e#1553#1797#0" />
-            <element signature="e#2050#2375#0" />
+            <element signature="e#968#1561#0" />
+            <element signature="e#1593#1837#0" />
+            <element signature="e#1962#4242#0" />
+            <element signature="e#1895#2109#0" />
+            <element signature="e#4853#5306#0" />
+            <element signature="e#2561#2692#0" />
+            <element signature="e#2531#3842#0" />
           </folding>
         </state>
       </provider>
@@ -699,13 +645,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="63" column="6" lean-forward="true" selection-start-line="63" selection-start-column="6" selection-end-line="63" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/django/db/models/fields/__init__.py" />
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -721,16 +660,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/crm/form.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1920">
-          <caret line="80" column="56" selection-start-line="80" selection-start-column="39" selection-end-line="80" selection-end-column="56" />
-          <folding>
-            <element signature="e#74#98#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-61628302/builtins.py" />
     <entry file="das://681a8315-15a9-468e-ace1-8895d5ffc5bf/schema/nb_crm/table/crm_userprofile">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
@@ -739,80 +668,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/crm/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-          <folding>
-            <element signature="e#74#106#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crm/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="68" column="17" lean-forward="true" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-            <element signature="e#255#817#0" />
-            <element signature="e#928#1521#0" />
-            <element signature="e#1553#1797#0" />
-            <element signature="e#2050#2375#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/crm/user_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
+        <state relative-caret-position="720">
           <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="47" selection-end-column="18" />
           <folding>
             <element signature="e#918#1692#0#HTML" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/crm/customer_add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/pagination.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/crm/customer_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="45" column="46" lean-forward="true" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://681a8315-15a9-468e-ace1-8895d5ffc5bf/schema/nb_crm/table/crm_customer">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crm/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="93" column="26" lean-forward="true" selection-start-line="93" selection-start-column="26" selection-end-line="93" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#4668#4840#0" />
-            <element signature="e#4885#5053#0" />
-            <element signature="e#6090#6563#0" />
-            <element signature="e#6602#7465#0" />
-            <element signature="e#7507#8777#0" />
-            <element signature="e#10470#11745#0" />
           </folding>
         </state>
       </provider>
@@ -824,6 +685,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/crm/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="das://681a8315-15a9-468e-ace1-8895d5ffc5bf/schema/nb_crm/table/crm_classlist">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -831,10 +699,126 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/crm/admin.py">
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/forms/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+        <state relative-caret-position="-170">
+          <caret line="306" column="45" selection-start-line="306" selection-start-column="45" selection-end-line="306" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/forms/widgets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="467" selection-start-line="467" selection-end-line="467" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/forms/renderers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crm/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="637">
+          <caret line="87" column="14" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crm/form.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="654">
+          <caret line="85" selection-start-line="85" selection-end-line="85" />
+          <folding>
+            <element signature="e#74#98#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://681a8315-15a9-468e-ace1-8895d5ffc5bf/schema/nb_crm/table/crm_customer">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
+          <folding>
+            <element signature="e#689#727#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/pagination.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="65" column="17" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="17" />
+          <folding>
+            <element signature="e#74#107#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-21">
+          <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+          <folding>
+            <element signature="e#405#431#0#HTML" expanded="true" />
+            <element signature="e#681#707#0#HTML" expanded="true" />
+            <element signature="e#1054#1094#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crm/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="e#0#68#0" expanded="true" />
+            <element signature="e#968#1561#0" />
+            <element signature="e#1593#1837#0" />
+            <element signature="e#1962#4242#0" />
+            <element signature="e#1895#2109#0" />
+            <element signature="e#4853#5306#0" />
+            <element signature="e#2561#2692#0" />
+            <element signature="e#2531#3842#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crm/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="19" column="10" lean-forward="true" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
+          <folding>
+            <element signature="e#74#106#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

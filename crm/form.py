@@ -77,9 +77,6 @@ class CustomerForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'course': forms.widgets.SelectMultiple,
-            'birthday': forms.widgets.DateInput,
-            'next_date': forms.widgets.DateTimeBaseInput,
-            'last_consult_date': forms.widgets.DateTimeInput,
         }
 
     def __init__(self, *args, **kwargs):

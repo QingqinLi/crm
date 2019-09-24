@@ -89,7 +89,10 @@ class Customer(models.Model):
     class_list = models.ManyToManyField('ClassList', verbose_name="已报班级", blank=True, null=True)
 
     def show_classes(self):
-        return ','.join([str(i) for i in self.class_list.all()])
+        if self.class_list.count() > 0:
+            return ','.join([str(i) for i in self.class_list.all()])
+        else:
+            return '暂未选课'
 
     def show_status(self):
         color_dict = {
