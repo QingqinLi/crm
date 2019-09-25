@@ -22,9 +22,14 @@ def login(request):
             next = request.POST.get("next")
             if next:
                 return redirect(next)
-            return redirect(reverse("crm:index"))
+            return redirect(reverse("crm:customer"))
         error_msg = '用户名或密码错误'
     return render(request, "login.html", {'error_msg': error_msg})
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect(reverse('crm:login'))
 
 
 @login_required()
@@ -179,6 +184,72 @@ def edit_customer(request, edit_id):
     return render(request, 'crm/customer_edit.html', {'form_obj': form_obj})
 
 
+class ConsultRecord(View):
+
+    def get(self, request):
+        consult_record = models.ConsultRecord.objects.filter(consultant=request.user)
+
+        query_params = request.GET.copy()
+
+        c = Pagination(request, 10, 10, consult_record, query_params)
+        page = c.show_li
+        query_params = self.get_query_params()
+
+        return render(request, 'crm/consult_record.html',
+                      {'consult_record': consult_record, "page": page, "data": c.show_list,
+                       'next_url': query_params})
+
+    def post(self, request):
+        pass
+
+    def get_query_params(self):
+        url = self.request.get_full_path()
+        qd = QueryDict()
+        qd._mutable = True
+        qd['next_page'] = url
+        query_params = qd.urlencode()
+
+        return query_params
+
+
+def add_consult_record(request):
+    consult_obj = models.ConsultRecord(consultant=request.user)
+    form_obj = form.ConsultRecordForm(instance=consult_obj)
+    if request.method == 'POST':
+        form_obj = form.ConsultRecordForm(request.POST, instance=consult_obj)
+        if form_obj.is_valid():
+            form_obj.save()
+            next = request.GET.get('next_url')
+            if next:
+                redirect(next)
+            return redirect(reverse("crm:consult_record"))
+    return render(request, 'crm/consult_record_add.html', {'form_obj': form_obj})
+
+
+def edit_consult_record(request, consult_record_id):
+    consult_obj = models.ConsultRecord.objects.filter(id=consult_record_id).first()
+    # consult_obj = models.ConsultRecord.objects.filter(id=consult_record_id)
+    form_obj = form.ConsultRecordForm(instance=consult_obj)
+    if request.method == 'POST':
+        form_obj = form.ConsultRecordForm(request.POST, instance=consult_obj)
+        if form_obj.is_valid():
+            form_obj.save()
+            next = request.GET.get('next_url')
+            if next:
+                redirect(next)
+            return redirect(reverse("crm:consult_record"))
+    return render(request, 'crm/consult_record_edit.html', {'form_obj': form_obj})
+
+
+class Enrollment(View):
+    def get(self, request):
+        enrollment_obj = models.Enrollment.objects.all()
+        return render(request, 'crm/enrollment_list.html', {'enrollment_obj': enrollment_obj})
+
+    def post(self, request):
+        pass
+
+
 def user_list(request):
     try:
         current_page = int(request.GET.get('page'))
@@ -191,7 +262,7 @@ def user_list(request):
         end = len(user_list) // item
     else:
         end = len(user_list) // item + 1
-    range_start = current_page - max_page//2
+    range_start = current_page - max_page // 2
     range_end = current_page + max_page // 2
     if range_start < 1:
         range_start = 1

@@ -77,9 +77,28 @@ class CustomerForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'course': forms.widgets.SelectMultiple,
+            'birthday': forms.widgets.DateInput,
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for i in self.fields.values():
             i.widget.attrs.update({"class": "form-control"})
+
+
+class ConsultRecordForm(forms.ModelForm):
+    class Meta:
+        model = models.ConsultRecord
+        exclude = ['delete_status']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        customer_choice = [(i.id, i) for i in self.instance.consultant.customers.all()]
+
+        # 限制客户是当前销售的私户
+        self.fields['customer'].widget.choices = customer_choice
+        self.fields['consultant'].widget.choices = [(self.instance.consultant.id, self.instance.consultant), ]
+        for i in self.fields:
+            self.fields[i].widget.attrs.update({'class': 'form-control'})
+
+

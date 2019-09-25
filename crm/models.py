@@ -155,7 +155,7 @@ class ConsultRecord(models.Model):
     """
     跟进记录表
     """
-    customer = models.ForeignKey('Customer', verbose_name="所咨询客户")
+    customer = models.ForeignKey('Customer', verbose_name="所跟进客户")
     note = models.TextField(verbose_name="跟进内容...")
     status = models.CharField("跟进状态", max_length=8, choices=seek_status_choices, help_text="选择客户此时的状态")
     consultant = models.ForeignKey("UserProfile", verbose_name="跟进人", related_name='records')
@@ -356,7 +356,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     # 用户更长且正式的标示符号，拥以非正式的方法标示用户
     def get_full_name(self):
         # The user is identified by their email address
-        return self.name
+        return self.username
 
     def get_short_name(self):
         # The user is identified by their email address

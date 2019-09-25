@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            客户
+            <a href="{% url "crm:add_consult_record" %}?{{ next_url }}" class="btn-sm btn-success" style="float: right">添加</a>
+        </div>
+
+
+        <div class="panel-body">
+            <form action="" method="get" class="pull-right form-inline" style="margin-bottom: 10px">
+                <input type="text" class="form-control" name="query">
+                <button class=" btn btn-sm btn-primary">搜索<i class="fa fa-search"></i></button>
+            </form>
+            <form action="" method="post" class="form-inline" style="margin-bottom: 10px">
+                {% csrf_token %}
+
+
+{#                <select name="operate" id="" class="form-control">#}
+{#                    <option value="">请选择</option>#}
+{#                    <option value="multi_delete">删除用户</option>#}
+{#                    <option value="multi_apply">放入私户</option>#}
+{#                    <option value="multi_pub">放入公户</option>#}
+{#                </select>#}
+{##}
+{#                <button class="btn btn-primary btn-sm" style="margin-top:5px; margin-left: 5px">提交</button>#}
+
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr class="text-center">
+{#                        <th class="text-center">选择</th>#}
+                        <th class="text-center">编号</th>
+                        <th class="text-center">客户</th>
+                        <th class="text-center">跟进内容</th>
+                        <th class="text-center">状态</th>
+                        <th class="text-center">跟进日期</th>
+                        <th class="text-center">销售</th>
+                        <th class="text-center">编辑</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in data %}
+                        <tr class="text-center">
+{#                            <td><input type="checkbox" name='id' value="{{ i.id }}"></td>#}
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.customer }}</td>
+                            <td>{{ i.note }}</td>
+                            <td>{{ i.get_status_display }}</td>
+                            <td>{{ i.date }}</td>
+                            <td>{{ i.consultant }}</td>
+                            <td class="text-center"><a href="{% url 'crm:edit_consult_record' i.id %}?{{ next_url }}"><i
+                                    class="fa fa-edit fa-fw"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+{#                        <li>#}
+{#                            <a href="{{ request.get_path_info }}?page={{ previous }}" aria-label="Previous">#}
+{#                                <span aria-hidden="true">&laquo;</span>#}
+{#                            </a>#}
+{#                        </li>#}
+{#                        {% for i in page %}#}
+{#                            <li><a href="{{ request.get_path_info }}?page={{ i }}">{{ i }}</a></li>#}
+{#                        {% endfor %}#}
+{##}
+{#                        <li>#}
+{#                            <a href="{{ request.get_path_info }}?page={{ next }}" aria-label="Next">#}
+{#                                <span aria-hidden="true">&raquo;</span>#}
+{#                            </a>#}
+{#                        </li>#}
+                        {{ page }}
+                    </ul>
+                </nav>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

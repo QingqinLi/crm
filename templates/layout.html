@@ -30,7 +30,7 @@
                     <li><a href="#">个人中心</a></li>
                     <li><a href="#">修改密码</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">注销</a></li>
+                    <li><a href="{% url 'logout' %}">注销</a></li>
                 </ul>
             </div>
             <ul class="nav navbar-nav navbar-right">
@@ -51,7 +51,7 @@
             <ul class="nav nav-sidebar">
                 <li><a href="{% url 'crm:customer' %}">客户列表</a></li>
                 <li><a href="{% url 'crm:my_customer' %}">我的客户</a></li>
-                <li><a href="#">Analytics</a></li>
+                <li><a href="{% url 'crm:consult_record' %}">跟进记录</a></li>
                 <li><a href="#">Export</a></li>
             </ul>
         </div>
