@@ -102,3 +102,33 @@ class ConsultRecordForm(forms.ModelForm):
             self.fields[i].widget.attrs.update({'class': 'form-control'})
 
 
+class EnrollmentForm(forms.ModelForm):
+
+    class Meta:
+        model = models.Enrollment
+        exclude = ['delete_status', 'contract_approved']
+
+        widgets = {
+            'contract_agreed': forms.widgets.CheckboxInput,
+        }
+
+    def clean_contract_agreed(self):
+        value = self.cleaned_data.get("contract_agreed")
+        if not value:
+            raise ValidationError("必须同意协议哦")
+        else:
+            return value
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # if student:
+        #     print(student, type(student), )
+        #     self.fields['customer'].widget.choices = [(student.id, student), ]
+        self.fields['customer'].widget.choices = [(self.instance.customer.id, self.instance.customer), ]
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({"class": "form-control"})
+
+
+
+
+

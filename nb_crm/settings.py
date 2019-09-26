@@ -138,3 +138,6 @@ STATICFILES_DIRS = [
 
 AUTH_USER_MODEL = "crm.UserProfile"
 LOGIN_URL = '/crm/login/'
+
+
+CUSTOMER_MAX_NUM = 5

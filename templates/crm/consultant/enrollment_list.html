@@ -38,12 +38,12 @@
                             <td>{{ forloop.counter }}</td>
                             <td>{{ i.customer }}</td>
                             <td>{{ i.school }}</td>
-                            <td>{{ i.class_id }}</td>
+                            <td>{{ i.enrolment_class }}</td>
                             <td>{{ i.why_us }}</td>
-                            <td>{{ i.your_exception }}</td>
-                            <td>{{ i.enrolled_data }}</td>
+                            <td>{{ i.your_expectation }}</td>
+                            <td>{{ i.enrolled_date }}</td>
                             <td>{{ i.memo }}</td>
-                            <td class="text-center"><a href="{% url 'crm:edit_consult_record' i.id %}?{{ next_url }}"><i
+                            <td class="text-center"><a href="{% url 'crm:edit_enrollment' i.customer.id %}?{{ next_url }}"><i
                                     class="fa fa-edit fa-fw"></i></a></td>
                         </tr>
                     {% endfor %}

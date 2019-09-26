@@ -3,8 +3,8 @@
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">
-            客户
-            <a href="{% url "crm:add_customer" %}?{{ next_url }}" class="btn-sm btn-success" style="float: right">添加</a>
+            班级
+            <a href="{% url "crm:add_class" %}?{{ next_url }}" class="btn-sm btn-success" style="float: right">添加</a>
         </div>
 
 
@@ -31,15 +31,17 @@
                     <tr class="text-center">
                         <th class="text-center">选择</th>
                         <th class="text-center">编号</th>
-                        <th class="text-center">昵称</th>
-                        <th class="text-center">性别</th>
-                        <th class="text-center">电话</th>
-                        <th class="text-center">来源</th>
                         <th class="text-center">课程</th>
+                        <th class="text-center">学期</th>
                         <th class="text-center">备注</th>
-                        <th class="text-center">状态</th>
-                        <th class="text-center">下次跟进日期</th>
-                        <th class="text-center">销售</th>
+                        <th class="text-center">开始日期</th>
+                        <th class="text-center">结束日期</th>
+                        <th class="text-center">班级类型</th>
+                        <th class="text-center">校区</th>
+                        <th class="text-center">班主任</th>
+                        {% if request.path_info == '/crm/my_customer/' %}
+                            <th class="text-center">报名记录</th>
+                        {% endif %}
                         <th class="text-center">编辑</th>
                     </tr>
                     </thead>
@@ -47,19 +49,22 @@
                     {% for i in data %}
                         <tr class="text-center">
                             <td><input type="checkbox" name='id' value="{{ i.id }}"></td>
-                            <td>{{ i.id }}</td>
-                            <td>{{ i.name }}</td>
-                            <td>{{ i.get_sex_display }}</td>
-                            <td>{{ i.phone }}</td>
-                            <td>{{ i.get_source_display }}</td>
-                            <td>{{ i.show_classes }}</td>
-                            <td>{{ i.customer_note|default:'--'|truncatechars:10 }}</td>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.get_course_display }}</td>
+                            <td>{{ i.semester }}</td>
+                            <td>{{ i.memo }}</td>
+                            <td>{{ i.start_date }}</td>
+                            <td>{{ i.graduate_date }}</td>
+                            <td>{{ i.class_type }}</td>
                             <td>
-                                {{ i.show_status }}
+                                {{ i.campuses }}
                             </td>
-                            <td>{{ i.next_date }}</td>
-                            <td>{{ i.consultant|default:'--' }}</td>
-                            <td class="text-center"><a href="{% url 'crm:edit_customer' i.id %}?{{ next_url }}"><i
+                            <td>{{ i.show_teacher }}</td>
+
+                            {% if request.path_info == '/crm/my_customer/' %}
+                                <td>{{ i.show_enroll }}</td>
+                            {% endif %}
+                            <td class="text-center"><a href="{% url 'crm:edit_class' i.id %}?{{ next_url }}"><i
                                     class="fa fa-edit fa-fw"></i></a></td>
                         </tr>
                     {% endfor %}
@@ -68,20 +73,6 @@
 
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
-{#                        <li>#}
-{#                            <a href="{{ request.get_path_info }}?page={{ previous }}" aria-label="Previous">#}
-{#                                <span aria-hidden="true">&laquo;</span>#}
-{#                            </a>#}
-{#                        </li>#}
-{#                        {% for i in page %}#}
-{#                            <li><a href="{{ request.get_path_info }}?page={{ i }}">{{ i }}</a></li>#}
-{#                        {% endfor %}#}
-{##}
-{#                        <li>#}
-{#                            <a href="{{ request.get_path_info }}?page={{ next }}" aria-label="Next">#}
-{#                                <span aria-hidden="true">&raquo;</span>#}
-{#                            </a>#}
-{#                        </li>#}
                         {{ page }}
                     </ul>
                 </nav>

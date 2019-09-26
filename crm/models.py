@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib import auth
 from django.core.exceptions import PermissionDenied
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager,User
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager, User
 from django.utils.translation import ugettext_lazy as _
 from multiselectfield import MultiSelectField
 from django.utils.safestring import mark_safe
+from django.urls import reverse
 
 # choice 在内存创建一个关联，来取代简单的表关联
 # help-text 在admin中提示帮助信息
@@ -101,7 +102,18 @@ class Customer(models.Model):
             'studying': 'pink',
             'paid_in_full': 'blue',
         }
-        return mark_safe('<span style="background-color: {};color: white;padding: 4px">{}</span>'.format(color_dict[self.status], self.get_status_display()))
+        return mark_safe(
+            '<span style="background-color: {};color: white;padding: 4px">{}</span>'.format(color_dict[self.status],
+                                                                                            self.get_status_display()))
+
+    def show_enroll(self):
+        if self.enrollment_set.count() == 0:
+            return mark_safe("<a href={}>添加</a>".format(reverse("crm:add_enrollment", args=(self.id,))))
+        else:
+            return mark_safe("<a href={}>详情</a>|<a href={}>添加</a>".format(reverse("crm:enrollment",
+                                                                                   args=(self.id,)),
+                                                                           reverse("crm:add_enrollment",
+                                                                                   args=(self.id,))))
 
     def __str__(self):
         return self.name
@@ -149,6 +161,9 @@ class ClassList(models.Model):
 
     def __str__(self):
         return "{}-{}-{}".format(self.get_course_display(), self.semester, self.campuses)
+
+    def show_teacher(self):
+        return "|".join([str(i) for i in self.teachers.all()])
 
 
 class ConsultRecord(models.Model):

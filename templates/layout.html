@@ -27,7 +27,8 @@
                 <img class="img-circle" height="45px" style="margin-top: 2.5px;margin-right: 5px" src="{% static 'imgs/layout/default.png' %}" alt="" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                 <ul class="dropdown-menu">
-                    <li><a href="#">个人中心</a></li>
+                    <li><a href="#">{{ request.user }}</a></li>
+{#                    <li><a href="#">个人中心</a></li>#}
                     <li><a href="#">修改密码</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="{% url 'logout' %}">注销</a></li>
@@ -52,7 +53,8 @@
                 <li><a href="{% url 'crm:customer' %}">客户列表</a></li>
                 <li><a href="{% url 'crm:my_customer' %}">我的客户</a></li>
                 <li><a href="{% url 'crm:consult_record' %}">跟进记录</a></li>
-                <li><a href="#">Export</a></li>
+                <li><a href="{% url 'crm:enrollment' 0 %}">报名记录</a></li>
+                 <li><a href="{% url 'crm:classes' %}">班级管理</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

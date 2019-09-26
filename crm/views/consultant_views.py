@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, reverse, HttpResponse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from crm import form
+from crm.form import consultant_form
 from crm import models
 from utils.pagination import Pagination
 from django.views import View
 from django.db.models import Q
 from django.http import QueryDict
+from django.conf import settings
+from django.db import transaction
 
 
 # Create your views here.
@@ -38,9 +40,9 @@ def index(request):
 
 
 def register(request):
-    reg_form = form.RegForm()
+    reg_form = consultant_form.RegForm()
     if request.method == 'POST':
-        reg_form = form.RegForm(request.POST)
+        reg_form = consultant_form.RegForm(request.POST)
         if reg_form.is_valid():
             reg_form.cleaned_data.pop("re_password")
             print(reg_form.cleaned_data)
@@ -82,7 +84,8 @@ class Customer(View):
 
         next_url = self.get_add_btn()
         print("next_url", next_url)
-        return render(request, 'crm/customer_list.html', {'page': customer_data, "data": c.show_list,
+
+        return render(request, 'crm/consultant/customer_list.html', {'page': customer_data, "data": c.show_list,
                                                           'next_url': next_url})
 
     def post(self, request):
@@ -91,7 +94,9 @@ class Customer(View):
         if not hasattr(self, operate):
             return HttpResponse("illegal operation")
         else:
-            getattr(self, operate)()
+            ret = getattr(self, operate)()
+        if ret:
+            return ret
         return self.get(request)
 
     def multi_delete(self):
@@ -101,21 +106,35 @@ class Customer(View):
     # 放入私户
     def multi_apply(self):
         ids = self.request.POST.getlist("id")
-        ids_objs = models.Customer.objects.filter(id__in=ids)
-        if ids:
-            for id in ids_objs:
-                id.consultant = self.request.user
-                # 需要save
-                id.save()
-                print(id.consultant)
+        # if ids:
+        #     for id in ids_objs:
+        #         id.consultant = self.request.user
+        #         # 需要save
+        #         id.save()
 
-        print(ids)
+        apply_num = len(ids)
+        print("apply_num", apply_num)
+
+        #
+        if self.request.user.customers.count() + apply_num > settings.CUSTOMER_MAX_NUM:
+            return HttpResponse('做人不要台贪心')
+
+        with transaction.atomic():
+            obj_list = models.Customer.objects.filter(id__in=ids, consultant__isnull=True).select_for_update()
+            print("obj_list", len(obj_list))
+            if apply_num == len(obj_list):
+                obj_list.update(consultant=self.request.user)
+            else:
+                return HttpResponse("手速太慢，到嘴的鸭子飞了～～")
+
+        # print(ids)
         # models.Customer.objects.filter(id__in=ids).update(consultant=self.request.user) 不需要save
         # self.request.user.customers.add(*models.Customer.objects.filter(id__in=ids))
 
     # 放入公户
     def multi_pub(self):
         ids = self.request.POST.getlist("id")
+
         models.Customer.objects.filter(id__in=ids).update(consultant=None)
 
     def get_search_condition(self, query_list):
@@ -132,7 +151,6 @@ class Customer(View):
         qd = QueryDict()
         qd._mutable = True
         qd['next_page'] = url
-        print("qd", qd)
         query_params = qd.urlencode()
 
         return query_params
@@ -148,40 +166,40 @@ def customer_list(request):
     c = Pagination(request, 10, 10, customer)
     customer_data = c.show_list()
 
-    return render(request, 'crm/customer_list.html', customer_data)
+    return render(request, 'crm/consultant/customer_list.html', customer_data)
 
 
 # 添加和编辑可以使用一个view函数
 @login_required()
 def add_customer(request):
-    form_obj = form.CustomerForm()
+    form_obj = consultant_form.CustomerForm()
     next = request.GET.get("next_page")
     print("next", next)
     if request.method == 'POST':
-        form_obj = form.CustomerForm(request.POST)
+        form_obj = consultant_form.CustomerForm(request.POST)
         if form_obj.is_valid():
             # modelsForm的创建用户的方式
             form_obj.save()
             if next:
                 return redirect(next)
             return redirect(reverse("crm:customer"))
-    return render(request, 'crm/customer_add.html', {'form_obj': form_obj})
+    return render(request, 'crm/consultant/customer_add.html', {'form_obj': form_obj})
 
 
 @login_required()
 def edit_customer(request, edit_id):
     obj = models.Customer.objects.filter(id=edit_id).first()
-    form_obj = form.CustomerForm(instance=obj)
+    form_obj = consultant_form.CustomerForm(instance=obj)
     next = request.GET.get("next_page")
 
     if request.method == 'POST':
-        form_obj = form.CustomerForm(request.POST, instance=obj)
+        form_obj = consultant_form.CustomerForm(request.POST, instance=obj)
         if form_obj.is_valid():
             form_obj.save()
             if next:
                 return redirect(next)
             return redirect(reverse('crm:customer'))
-    return render(request, 'crm/customer_edit.html', {'form_obj': form_obj})
+    return render(request, 'crm/consultant/customer_edit.html', {'form_obj': form_obj})
 
 
 class ConsultRecord(View):
@@ -195,7 +213,7 @@ class ConsultRecord(View):
         page = c.show_li
         query_params = self.get_query_params()
 
-        return render(request, 'crm/consult_record.html',
+        return render(request, 'crm/consultant/consult_record.html',
                       {'consult_record': consult_record, "page": page, "data": c.show_list,
                        'next_url': query_params})
 
@@ -214,40 +232,88 @@ class ConsultRecord(View):
 
 def add_consult_record(request):
     consult_obj = models.ConsultRecord(consultant=request.user)
-    form_obj = form.ConsultRecordForm(instance=consult_obj)
+    form_obj = consultant_form.ConsultRecordForm(instance=consult_obj)
     if request.method == 'POST':
-        form_obj = form.ConsultRecordForm(request.POST, instance=consult_obj)
+        form_obj = consultant_form.ConsultRecordForm(request.POST, instance=consult_obj)
         if form_obj.is_valid():
             form_obj.save()
             next = request.GET.get('next_url')
             if next:
                 redirect(next)
             return redirect(reverse("crm:consult_record"))
-    return render(request, 'crm/consult_record_add.html', {'form_obj': form_obj})
+    return render(request, 'crm/consultant/consult_record_add.html', {'form_obj': form_obj})
 
 
 def edit_consult_record(request, consult_record_id):
     consult_obj = models.ConsultRecord.objects.filter(id=consult_record_id).first()
     # consult_obj = models.ConsultRecord.objects.filter(id=consult_record_id)
-    form_obj = form.ConsultRecordForm(instance=consult_obj)
+    form_obj = consultant_form.ConsultRecordForm(instance=consult_obj)
     if request.method == 'POST':
-        form_obj = form.ConsultRecordForm(request.POST, instance=consult_obj)
+        form_obj = consultant_form.ConsultRecordForm(request.POST, instance=consult_obj)
         if form_obj.is_valid():
             form_obj.save()
             next = request.GET.get('next_url')
             if next:
                 redirect(next)
             return redirect(reverse("crm:consult_record"))
-    return render(request, 'crm/consult_record_edit.html', {'form_obj': form_obj})
+    return render(request, 'crm/consultant/consult_record_edit.html', {'form_obj': form_obj})
 
 
 class Enrollment(View):
-    def get(self, request):
-        enrollment_obj = models.Enrollment.objects.all()
-        return render(request, 'crm/enrollment_list.html', {'enrollment_obj': enrollment_obj})
+    def get(self, request, student_id):
+        if student_id == '0':
+
+            enrollment_obj = models.Enrollment.objects.filter(customer__consultant=request.user)
+        else:
+            enrollment_obj = models.Enrollment.objects.filter(customer_id=student_id)
+        print(enrollment_obj.count(), enrollment_obj)
+
+        query_params = self.get_query_params()
+
+        c = Pagination(request, 10, 10, enrollment_obj, query_params)
+        page = c.show_li
+
+        return render(request, 'crm/consultant/enrollment_list.html', {'data': c.show_list,
+                                                            'page': page})
 
     def post(self, request):
         pass
+
+    def get_query_params(self):
+        url = self.request.get_full_path()
+        qd = QueryDict()
+        qd._mutable = True
+        qd['next_page'] = url
+        # query_params = qd.urlencode()
+
+        return qd
+
+
+def enrollment(request, edit_id=None, student_id=None):
+    obj = models.Enrollment.objects.filter(customer_id=edit_id).first() or models.Enrollment(customer_id=student_id)
+    form_obj = consultant_form.EnrollmentForm(instance=obj)
+    print(obj, edit_id, student_id, models.Enrollment.objects.filter(customer_id=edit_id), models.Enrollment(customer_id=student_id))
+
+    if request.method == 'POST':
+
+        form_obj = consultant_form.EnrollmentForm(request.POST, instance=obj)
+        print("222", request.POST)
+        if form_obj.is_valid():
+            form_obj.save()
+            # 修改客户的状态
+            customer_obj = models.Customer.objects.filter(id=student_id).first()
+            if customer_obj.status == 'unregistered':
+                customer_obj.status = 'signed'
+                customer_obj.save()
+            next = request.GET.get('next_url')
+            print('next', next)
+            if next:
+                return redirect(next)
+            print('hello here')
+            return redirect(reverse('crm:enrollment', args=(0,)))
+        else:
+            print("333", form_obj)
+    return render(request, 'crm/consultant/enrollment_add.html', {'form_obj': form_obj, })
 
 
 def user_list(request):
@@ -287,7 +353,7 @@ def user_list(request):
         next = current_page + 1
     print(previous, next)
 
-    return render(request, 'crm/user_list.html',
+    return render(request, 'crm/consultant/user_list.html',
                   {
                       "user": data,
                       "page": page,

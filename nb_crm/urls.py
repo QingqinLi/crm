@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from crm import views
+from crm.views import consultant_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^crm/', include("crm.urls", namespace="crm")),
-    url(r'^logout/', view=views.logout, name='logout')
+    url(r'^logout/', view=consultant_views.logout, name='logout')
 ]
