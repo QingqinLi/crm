@@ -163,7 +163,7 @@ class ClassList(models.Model):
         return "{}-{}-{}".format(self.get_course_display(), self.semester, self.campuses)
 
     def show_teacher(self):
-        return "|".join([str(i) for i in self.teachers.all()])
+        return " | ".join([str(i) for i in self.teachers.all()])
 
 
 class ConsultRecord(models.Model):

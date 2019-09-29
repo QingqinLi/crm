@@ -86,7 +86,7 @@ class Customer(View):
         print("next_url", next_url)
 
         return render(request, 'crm/consultant/customer_list.html', {'page': customer_data, "data": c.show_list,
-                                                          'next_url': next_url})
+                                                                     'next_url': next_url})
 
     def post(self, request):
         operate = request.POST.get('operate')
@@ -274,7 +274,7 @@ class Enrollment(View):
         page = c.show_li
 
         return render(request, 'crm/consultant/enrollment_list.html', {'data': c.show_list,
-                                                            'page': page})
+                                                                       'page': page})
 
     def post(self, request):
         pass
@@ -292,7 +292,8 @@ class Enrollment(View):
 def enrollment(request, edit_id=None, student_id=None):
     obj = models.Enrollment.objects.filter(customer_id=edit_id).first() or models.Enrollment(customer_id=student_id)
     form_obj = consultant_form.EnrollmentForm(instance=obj)
-    print(obj, edit_id, student_id, models.Enrollment.objects.filter(customer_id=edit_id), models.Enrollment(customer_id=student_id))
+    print(obj, edit_id, student_id, models.Enrollment.objects.filter(customer_id=edit_id),
+          models.Enrollment(customer_id=student_id))
 
     if request.method == 'POST':
 

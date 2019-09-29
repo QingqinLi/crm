@@ -35,5 +35,16 @@ urlpatterns = [
     # 班级的管理
     url('^class_list/', teacher_views.Classes.as_view(), name='classes'),
     url('^class/add/', teacher_views.classes, name='add_class'),
-    url('^class/edit/(?P<class_id>\d+)', teacher_views.classes, name='edit_class')
+    url('^class/edit/(?P<class_id>\d+)', teacher_views.classes, name='edit_class'),
+
+    # 课程的管理
+    url('^course_list/(?P<class_id>\d+)', teacher_views.Course.as_view(), name='course'),
+    url('^course/add/(?P<class_id>\d+)', teacher_views.course, name='add_course'),
+    url('^course/edit/(?P<course_id>\d+)', teacher_views.course, name='edit_course'),
+
+    # 学习记录的管理
+    url('^study_record_list/(?P<course_id>\d+)', teacher_views.study_record, name='study_record'),
+    url('^study_record/', teacher_views.study_record_list, name='study_record_list'),
+
+
 ]
