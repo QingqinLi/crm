@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.3.7-dist/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
     <title>CRM管理系统</title>
     {% block css %}
 
@@ -50,16 +51,19 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="{% url 'crm:customer' %}">客户列表</a></li>
-                <li><a href="{% url 'crm:my_customer' %}">我的客户</a></li>
-                <li><a href="{% url 'crm:consult_record' %}">跟进记录</a></li>
-                <li><a href="{% url 'crm:enrollment' 0 %}">报名记录</a></li>
-                 <li><a href="{% url 'crm:classes' %}">班级管理</a></li>
-                <li><a href="{% url 'crm:course' 0 %}">课程管理</a></li>
-                <li><a href="{% url 'crm:study_record_list' %}">学习记录</a></li>
+                {% load rabc%}
+                {% menu request %}
+{#                <li><a href="{% url 'crm:customer' %}">客户列表</a></li>#}
+{#                <li><a href="{% url 'crm:my_customer' %}">我的客户</a></li>#}
+{#                <li><a href="{% url 'crm:consult_record' %}">跟进记录</a></li>#}
+{#                <li><a href="{% url 'crm:enrollment' 0 %}">报名记录</a></li>#}
+{#                 <li><a href="{% url 'crm:classes' %}">班级管理</a></li>#}
+{#                <li><a href="{% url 'crm:course' 0 %}">课程管理</a></li>#}
+{#                <li><a href="{% url 'crm:study_record_list' %}">学习记录</a></li>#}
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        {% breadcrumb request %}
             {% block content %}
 
             {% endblock %}
@@ -69,6 +73,7 @@
 
 <script src="{% static 'js/jQuery.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-3.3.7-dist/js/bootstrap.js' %}"></script>
+<script src="{% static 'js/menu.js' %}"></script>
 <script>
     $("li").click(function(){
         $(this).parent().children("li").removeClass("active");

@@ -6,6 +6,7 @@ __author__ = 'qing.li'
 from django import forms
 from crm import models
 from django.core.exceptions import ValidationError
+from rbac.models import User
 
 
 class RegForm(forms.ModelForm):
@@ -22,7 +23,7 @@ class RegForm(forms.ModelForm):
 
     class Meta:
         model = models.UserProfile
-        fields = ['username', 'password', 'name', 'department']
+        fields = ['username', 'password', 'name', 'department', 'user']
         # exclude = []
         widgets = {
             'password': forms.widgets.PasswordInput(),
@@ -33,6 +34,7 @@ class RegForm(forms.ModelForm):
             'password': '密码',
             'name': '昵称',
             'department': '部门',
+            'user': '关联用户'
         }
         error_messages = {
             'username': {
@@ -48,6 +50,9 @@ class RegForm(forms.ModelForm):
             },
             'department': {
                 'required': '部门不能为空',
+            },
+            'user': {
+                'required': '关联用户不能为空',
             }
         }
 
@@ -57,6 +62,8 @@ class RegForm(forms.ModelForm):
             self.fields[i].widget.attrs.update({"class": "input"})
         self.fields['department'].widget.attrs.update({"class": "s1"})
         self.fields['username'].widget.attrs.update({"id": "user"})
+        self.fields['user'].widget.choices = [(i.id, i.name) for i in User.objects.all()]
+        self.fields['user'].widget.attrs.update({"class": "s1"})
 
     def clean(self):
         username = self.cleaned_data.get("username")

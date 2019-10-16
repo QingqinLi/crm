@@ -20,5 +20,8 @@ from crm.views import consultant_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^crm/', include("crm.urls", namespace="crm")),
-    url(r'^logout/', view=consultant_views.logout, name='logout')
+    url(r'^logout/', view=consultant_views.logout, name='logout'),
+    url(r'^rbac/', include("rbac.urls", namespace="rbac")),
+    url(r'^v_code/', view=consultant_views.v_code, name='v_code'),
+    url(r'^login/', view=consultant_views.login, name='login'),
 ]

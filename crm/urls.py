@@ -7,7 +7,7 @@ from django.conf.urls import url
 from crm.views import consultant_views, teacher_views
 
 urlpatterns = [
-    url('^login/', view=consultant_views.login, name='login'),
+    # url('^login/', view=consultant_views.login, name='login'),
     url('^index/', view=consultant_views.index, name='index'),
     url('^reg/', view=consultant_views.register, name='register'),
     url('^checkUser/', consultant_views.check_name, name='check_name'),
@@ -45,6 +45,7 @@ urlpatterns = [
     # 学习记录的管理
     url('^study_record_list/(?P<course_id>\d+)', teacher_views.study_record, name='study_record'),
     url('^study_record/', teacher_views.study_record_list, name='study_record_list'),
+
 
 
 ]

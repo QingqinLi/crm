@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crm',
+    'rbac',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'rbac.middlewares.rbac.PermissionMiddle',
 ]
 
 ROOT_URLCONF = 'nb_crm.urls'
@@ -140,3 +142,14 @@ LOGIN_URL = '/crm/login/'
 
 
 CUSTOMER_MAX_NUM = 5
+
+PERMISSION_SESSION_KEY = 'permission_list'
+MENU_SESSION_KEY = 'menu'
+WHITE_URL_LIST = [
+    r'/login/$',
+    r'^/reg/$',
+    r'/logout/$',
+    r'/admin/.*',
+    r'/v_code/$',
+
+]

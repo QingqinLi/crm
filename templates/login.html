@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="description" content="此代码内容为超萌的猫头鹰登录界面">
     <title>crm管理系统</title>
-    <link rel="stylesheet" href="{% static 'css/jq22.css'%}">
+    <link rel="stylesheet" href="{% static 'css/jq22.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
 </head>
 <body>
@@ -40,18 +40,35 @@
                     </div>
                     <div class="control-group">
                         <div class="controls">
+                            <label for="v_code" class="control-label fa fa-asterisk"></label>
+                            <input id="v_code" type="text" name="v_code" placeholder="验证码" tabindex="2"
+                                   class="form-control input-medium">
+                        </div>
+                    </div>
+                    <div style="text-align: center">
+                        <img src="/v_code/" alt="" id="code">
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
                             <span style="color: red">{{ error_msg }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="form-actions"><a href="#" tabindex="5" class="btn pull-left btn-link text-muted">Forgot
-                    password?</a><a href="{% url 'crm:register' %}" tabindex="6" class="btn btn-link text-muted">Sign Up</a>
+                    password?</a><a href="{% url 'crm:register' %}" tabindex="6" class="btn btn-link text-muted">Sign
+                    Up</a>
                     <button type="submit" tabindex="4" class="btn btn-primary">Login</button>
                 </div>
             </form>
         </div>
     </div>
     <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>
+        img = document.getElementById('code');
+        img.onclick = function () {
+            img.src += '?'
+        }
+    </script>
     <script>
         $(function () {
 
@@ -61,6 +78,7 @@
                 $('#owl-login').removeClass('password');
             });
         });
+
     </script>
 </div>
 

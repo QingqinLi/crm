@@ -45,6 +45,12 @@
                             {{ reg_form.department }}
                             <span style="color: red">{{ reg_form.department.errors.0 }}</span>
                         </div>
+
+                        <div class="group">
+                            <label class="label">{{ reg_form.user.label }}</label>
+                            {{ reg_form.user }}
+                            <span style="color: red">{{ reg_form.user.errors.0 }}</span>
+                        </div>
                         <div class="group">
                             <input type="submit" class="button" value="登录" id="bt">
                         </div>

@@ -1,0 +1,141 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div style="margin:20px">
+        <div class="panel panel-default col-sm-4">
+            <!-- Default panel contents -->
+
+            <div class="panel-heading" style="margin-bottom: 5px">
+                <i class="fa fa-book"></i>菜单管理
+                <a href="{% url 'rbac:menu_add' %}" class="btn btn-success btn-sm pull-right "
+                   style="padding: 2px 8px;margin: -3px;"> <i
+                        class="fa fa-plus"></i> 新建</a>
+            </div>
+
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>标题</th>
+                    <th>icon</th>
+                    <th>权重</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for menu in all_menus %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="?mid={{ menu.id }}">{{ menu.title }}</a></td>
+                        <td><i class="fa {{ menu.icon }}"></i></td>
+                        <td>{{ menu.weight }}</td>
+                        <td>
+                            <a style="color: #333333;" href="{% url 'rbac:menu_edit' menu.id %}">
+                                <i class="fa fa-edit" aria-hidden="true"></i></a>
+
+                            <a style="color: #d9534f;" href="{% url 'rbac:menu_del' menu.id %}"><i
+                                    class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="panel panel-default col-sm-7 col-sm-offset-1">
+            <!-- Default panel contents -->
+
+            <div class="panel-heading" style="margin-bottom: 5px">
+                <i class="fa fa-cubes"></i>权限管理
+                <a href="{% url 'rbac:permission_add' %}" class="btn btn-success btn-sm pull-right "
+                   style="padding: 2px 8px;margin: -3px;"> <i
+                        class="fa fa-plus"></i> 新建</a>
+
+                <a href="{% url 'rbac:multi_permissions' %}" class="btn btn-primary btn-sm pull-right "
+                   style="padding: 2px 8px;margin: -3px;"> <i
+                        class="fa fa-plus"></i> 批量操作</a>
+            </div>
+
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>标题</th>
+                    <th>NAME</th>
+                    <th>URL</th>
+                    <th>是否为菜单</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="permission-area">
+                {% for permission in all_permissions.values %}
+                    <tr class="{% if permission.menu_id %}menu_select{% endif %} parent" id="{{ permission.id }}">
+                        <td>{{ forloop.counter }}</td>
+                        <td class="title">{% if permission.menu_id %}
+
+                            <i class="fa fa-caret-down"></i>
+                        {% endif %}
+                            {{ permission.title }}
+                        </td>
+                        <td>{{ permission.name }}</td>
+                        <td>{{ permission.url }}</td>
+                        <td>
+                            是
+                        </td>
+                        <td>
+                            <a style="color: #333333;" href="{% url 'rbac:permission_edit' permission.id%}">
+                                <i class="fa fa-edit" aria-hidden="true"></i></a>
+
+                            <a style="color: #d9534f;" href="{% url 'rbac:permission_del' permission.id %}"><i
+                                    class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                    {% for child in permission.child %}
+                        <tr pid="{{ permission.id }}">
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                {{ child.title }}
+                            </td>
+                            <td>{{ child.name }}</td>
+                            <td>{{ child.url }}</td>
+                            <td>
+                            </td>
+                            <td>
+                                <a style="color: #333333;" href="{% url 'rbac:permission_edit' child.id%}">
+                                    <i class="fa fa-edit" aria-hidden="true"></i></a>
+
+                                <a style="color: #d9534f;" href="{% url 'rbac:permission_del' child.id %}"><i
+                                        class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block js %}
+    <script>
+        $('.permission-area').on('click', '.parent .title', function () {
+            var caret = $(this).find('i');
+            var id = $(this).parent().attr('id');
+            if (caret.hasClass('fa-caret-right')) {
+                caret.removeClass('fa-caret-right').addClass('fa-caret-down');
+                $(this).parent().nextAll('tr[pid="' + id + '"]').removeClass('hide');
+            } else {
+                caret.removeClass('fa-caret-down').addClass('fa-caret-right');
+                $(this).parent().nextAll('tr[pid="' + id + '"]').addClass('hide');
+
+            }
+        })
+    </script>
+{% endblock %}

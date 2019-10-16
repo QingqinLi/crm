@@ -1,0 +1,123 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div style="margin: 20px">
+    <div class="panel panel-default col-sm-3">
+            <!-- Default panel contents -->
+
+            <div class="panel-heading" style="margin-bottom: 5px">
+                <i class="fa fa-book"></i>用户管理
+                <a href="" class="btn btn-success btn-sm pull-right "
+                   style="padding: 2px 8px;margin: -3px;"> <i
+                        class="fa fa-plus"></i> 新建</a>
+            </div>
+
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名字</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="">{{ user.name }}</a></td>
+                        <td>
+                            <a style="color: #333333;" href="">
+                                <i class="fa fa-edit" aria-hidden="true"></i></a>
+
+                            <a style="color: #d9534f;" href=""><i
+                                    class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    <div class="panel panel-default col-sm-3 col-sm-offset-1">
+            <!-- Default panel contents -->
+
+            <div class="panel-heading" style="margin-bottom: 5px">
+                <i class="fa fa-book"></i>角色
+                <a href="" class="btn btn-success btn-sm pull-right "
+                   style="padding: 2px 8px;margin: -3px;"> <i
+                        class="fa fa-plus"></i> 新建</a>
+            </div>
+
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for role in roles %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="">{{ role.name }}</a></td>
+                        <td>
+                            <input type="checkbox">
+{#                            <a style="color: #333333;" href="">#}
+{#                                <i class="fa fa-edit" aria-hidden="true"></i></a>#}
+{##}
+{#                            <a style="color: #d9534f;" href=""><i#}
+{#                                    class="fa fa-trash-o"></i></a>#}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    <div class="panel panel-default col-sm-4 col-sm-offset-1">
+            <!-- Default panel contents -->
+
+            <div class="panel-heading" style="margin-bottom: 5px">
+                <i class="fa fa-book"></i>权限
+                <a href="" class="btn btn-success btn-sm pull-right "
+                   style="padding: 2px 8px;margin: -3px;"> <i
+                        class="fa fa-plus"></i> 新建</a>
+            </div>
+
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>URL</th>
+                    <th>名称</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for permission in permissions %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="">{{ permission.url }}</a></td>
+                        <td><a href="">{{ permission.title }}</a></td>
+                        <td>
+                            <input type="checkbox">
+{#                            <a style="color: #333333;" href="">#}
+{#                                <i class="fa fa-edit" aria-hidden="true"></i></a>#}
+{##}
+{#                            <a style="color: #d9534f;" href=""><i#}
+{#                                    class="fa fa-trash-o"></i></a>#}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

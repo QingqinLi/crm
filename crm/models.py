@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from multiselectfield import MultiSelectField
 from django.utils.safestring import mark_safe
 from django.urls import reverse
+from rbac.models import User
 
 # choice 在内存创建一个关联，来取代简单的表关联
 # help-text 在admin中提示帮助信息
@@ -358,6 +359,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     memo = models.TextField('备注', blank=True, null=True, default=None)
     date_joined = models.DateTimeField(auto_now_add=True)
+    user = models.OneToOneField(User, null=True, blank=True)
 
     # username_field 用作唯一表示服的字段名称的字符串，通常是某种用户名（邮件地址），必须设置为唯一（unique）
     USERNAME_FIELD = 'username'

@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% block css %}
+    <style>
+        .luffy-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .luffy-containerul li {
+            float: left;
+            list-style-type: none;
+            padding: 10px;
+            padding-left: 0;
+            width: 80px;
+        }
+
+        .luffy-containerul li i {
+            font-size: 18px;
+            margin-left: 5px;
+            color: #6d6565;
+        }
+
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="luffy-container" style="margin: 50px">
+        <form class="form-horizontal clearfix" method="post" action="" novalidate>
+            {% csrf_token %}
+
+            {% for field in form_obj %}
+                <div class="form-group col-sm-8 clearfix">
+                    <label class="col-sm-3 control-label">{{ field.label }}</label>
+                    <div class="col-sm-9">
+                        {{ field }} <span style="color:firebrick;">{{ field.errors.0 }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="form-group col-sm-12">
+                <div class="">
+                    <div class="col-sm-offset-9">
+                        <button type="submit" class="btn btn-primary">提 交</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
